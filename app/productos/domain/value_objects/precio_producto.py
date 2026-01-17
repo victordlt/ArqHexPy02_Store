@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 
 class PrecioProducto(BaseModel):
-    valor: float = Field(..., description="Nombre del producto")
+    valor: int = Field(..., description="Nombre del producto")
 
     #reglas de validacion
     @field_validator("valor")# Este método se ejecuta cada vez que se crea un objeto para validar el campo

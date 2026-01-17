@@ -1,5 +1,3 @@
-from typing import Union
-
 from fastapi import FastAPI
 from app.productos.infraestructure.routers.producto_router import router as producto_router
 from app.infraestructure.database.db_connection_factory import DBConnectionFactory
