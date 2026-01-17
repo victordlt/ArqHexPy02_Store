@@ -1,15 +1,18 @@
 from typing import Union
 
 from fastapi import FastAPI
+from app.productos.infraestructure.routers.producto_router import router as producto_router
+from app.infraestructure.database.db_connection_factory import DBConnectionFactory
 
-app = FastAPI()
+app = FastAPI(title = "FastAPI - Arquitectura Hexagonal ")
 
+@app.on_event("startup")
+def startup():
+    DBConnectionFactory.initialize()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+@app.on_event("shutdown")
+def shutdown():
+    print("Cerrando pool de conexiones...")
+    DBConnectionFactory.close_pool()
 
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+app.include_router(producto_router, prefix="/productos", tags=["Productos"])
