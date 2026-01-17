@@ -10,6 +10,7 @@ class NombreProducto(BaseModel):
             raise ValueError("El nombre no puede estar vacio")
         if len(v) > 50:
             raise ValueError("El nombre no puede exceder los 50 caracteres")
+        return v
     
     #Esto define cuándo dos objetos NombreProducto son iguales
     def __eq__(self, other):

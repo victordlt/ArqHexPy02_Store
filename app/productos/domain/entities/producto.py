@@ -6,7 +6,7 @@ class Producto(BaseModel):
     id :int = Field(..., description="Id producto")
     nombre : NombreProducto
     descripcion:str
-    precio : int #PrecioProducto
+    precio : PrecioProducto
     activo : bool
     imagen : str
     stock : int

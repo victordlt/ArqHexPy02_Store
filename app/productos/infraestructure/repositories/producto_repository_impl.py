@@ -4,6 +4,9 @@ from app.productos.domain.repository.producto_repository import ProductoReposito
 from app.productos.domain.entities.producto import Producto
 from app.infraestructure.database.db_connection_factory import DBConnectionFactory
 
+from app.productos.domain.value_objects.nombre_producto import NombreProducto
+from app.productos.domain.value_objects.precio_producto import PrecioProducto
+
 class ProductoRepositoryImpl(ProductoRepository):
     def get_all(self) -> List[Producto]:
         connection = DBConnectionFactory.get_connection()
@@ -11,7 +14,7 @@ class ProductoRepositoryImpl(ProductoRepository):
             with connection.cursor() as cursor:
                 cursor.execute("SELECT id, nombre, descripcion, precio, activo, imagen, stock FROM producto_producto")
                 rows = cursor.fetchall()
-                productos = [Producto(id=row[0], nombre=row[1], descripcion=row[2], precio=row[3], activo=row[4], imagen=row[5], stock=row[6]) for row in rows]
+                productos = [Producto(id=row[0], nombre= NombreProducto(valor=row[1]), descripcion=row[2], precio=PrecioProducto(valor=row[3]), activo=row[4], imagen=row[5], stock=row[6]) for row in rows]
                 return productos
         finally:
             DBConnectionFactory.release_connection(connection)
