@@ -5,7 +5,7 @@ from app.productos.domain.entities.producto import Producto
 
 class ProductoRepository(ABC): #Clase abstracta
     @abstractmethod
-    def get_all(self) -> List[Producto]: # al aplicar este metodo nos retornara una lista de producto
+    def get_all(self) -> List[Producto]: # al aplicar este metodo nos retornara una lista de productos
         pass
     
     @abstractmethod
